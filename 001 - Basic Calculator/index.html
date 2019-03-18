@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Basic Calculator</title>
+    </head>
+    <body>
+        <form>
+            <input type="number" id="number1" placeholder="First Number" />
+            <select name="operator">
+                <option value="add">+</option>
+                <option value="sub">-</option>
+                <option value="mul">*</option>
+                <option value="div">/</option>
+            </select>
+            <input type="number" id="number2" placeholder="Second Number" />
+            <input type="submit" value="Calculate" onclick="calculate()"/>
+        </form>
+        <div id="result-container"><p>The result is <strong id="result">&nbsp;</strong></p></div>
+
+        <script>
+            window.onload = function() {
+                document.getElementById("result-container").setAttribute("hidden", "TRUE");
+            };
+            function calculate(){
+                var a = parseInt(document.getElementById("number1").value);
+                var b = parseInt(document.getElementById("number2").value);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 300){
+                        document.getElementById('result').innerHTML = this.responseText;
+                        document.getElementById("result-container").removeAttribute('hidden');
+                    }
+                    this.open('GET', 'localhost:3000', true);
+                    this.send();
+                }
+            }
+        </script>
+    </body>
+</html>
